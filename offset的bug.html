@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>offset的bug</title>
+    <style>
+        #div1{height: 200px;width:200px;background: red;border:1px solid black;}/*加了边框后就会出现bug*/
+
+    </style>
+    <script>
+        function getStyle(obj,name)//getStyle获取不在行间的样式
+        {
+            if(obj.currentStyle)
+            {
+                return obj.currentStyle[name];
+            }
+            else
+            {
+                return getComputedStyle(obj,false)[name];
+            }
+        }
+        setInterval(function()
+        {
+            var oDiv=document.getElementById('div1');
+
+            // oDiv.style.width=oDiv.offsetWidth-1+'px'; //它的offsetWidth为width加两个border的宽度，所以是202，减一就是从201开始运动的
+            // oDiv.style.width=parseInt(oDiv.style.width)-1+'px'; //这一步是不用offsetWidth,所以把样式直接加在div里面
+            oDiv.style.width=parseInt(getStyle(oDiv,'width'))-1+'px';
+        },30)
+
+    </script>
+</head>
+<body>
+    <!-- <div id="div1" style="width: 200px;"></div> -->
+    <div id="div1"></div>
+</body>
+</html>
