@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>new2</title>
+    <script>
+       function CreatePerson(name,qq){     //构造函数
+            //系统偷偷完成
+            // var this=new Object();
+            //加工
+            this.name=name;
+            this.qq=qq;
+
+            CreatePerson.prototype.showName=function(){     //原型
+                alert('我的名字叫：'+this.name);
+            }
+            CreatePerson.prototype.showQQ=function(){
+                alert('我的qq号：'+this.qq);
+            }
+
+            //偷偷完成
+            // return this;
+        }
+        var obj=new CreatePerson('a','23123');
+        var obj2=new CreatePerson('w','2312213');
+
+        obj.showName();
+        obj.showQQ();
+        obj2.showName();
+        obj2.showQQ();
+        
+        // alert(obj.showName==obj2.showName)
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

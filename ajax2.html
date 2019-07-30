@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ajax</title>
+    <script>
+        window.onload=function(){
+            var oBtn=document.getElementById('btn1');
+
+            oBtn.onclick=function(){
+                //创建一个ajax对象
+                //非IE6
+                if(window.XMLHttpRequest){
+                    var oAjax=new XMLHttpRequest();
+                }else{
+                //TE6
+                    var oAjax=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                // alert(oAjax);
+
+                //2.连接服务器
+                //open（方法，文件名，异步传输）
+                oAjax.open('GET','a?='+new Date().getTime(),true);
+
+                //发送请求
+                oAjax.send();
+
+                //4接收返回值
+                oAjax.onreadystatechange=function(){
+                    //oAjax.readyState //浏览器和服务器，进行到哪一步了
+                    if(oAjax.readyState==4){  //读取完成
+                        if(oAjax.status==200) //成功
+                        {
+                            alert('成功:'+oAjax.responseText);
+                        }else{
+                            alert('失败:'+oAjax.status);
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="button" id="btn1" value="读取">
+</body>
+</html>
